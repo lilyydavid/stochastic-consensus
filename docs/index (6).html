@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What's worth teaching a child when AI can answer everything?</title>
+  <meta name="description" content="I asked AI which skills actually survive an unpredictable future, then stress-tested the answers against invented parents and kids. Almost everything came down to what the parent can stop themselves from doing.">
+  <meta property="og:title" content="What's worth teaching a child when AI can answer everything?">
+  <meta property="og:description" content="The answer wasn't about the child. It was about what the parent can stop themselves from doing.">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f9f8f5;
+      --text: #2a2a25;
+      --text-soft: #51504a;
+      --muted: #86847c;
+      --accent: #2d5986;
+      --amber: #b08a2e;
+      --amber-d: #8a6a1f;
+      --green: #3f7a45;
+      --red: #a8452f;
+      --rule: #e4e0d6;
+      --card: #ffffff;
+      --max-w: 760px;
+      --serif: Georgia, 'Times New Roman', serif;
+      --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    }
+
+    html { font-size: 19px; scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--serif);
+      line-height: 1.78;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    header, main, footer {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .mini-lbl {
+      font-family: var(--sans);
+      font-size: 0.64rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+
+    /* Header */
+    header { padding-top: 4.5rem; padding-bottom: 2.5rem; }
+    .eyebrow {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    h1 {
+      font-size: clamp(2.1rem, 6vw, 3rem);
+      font-weight: normal;
+      line-height: 1.14;
+      letter-spacing: -0.015em;
+      margin-bottom: 1.75rem;
+    }
+    .lede {
+      font-size: 1.14rem;
+      color: var(--text-soft);
+      line-height: 1.72;
+      margin-bottom: 1.2rem;
+    }
+    .lede:last-child { margin-bottom: 0; }
+    .lede strong { color: var(--text); font-weight: bold; }
+
+    /* Body */
+    main { padding-bottom: 1rem; }
+    main > section { margin-bottom: 3rem; }
+    p { margin-bottom: 1.3rem; }
+    p:last-child { margin-bottom: 0; }
+    em { font-style: italic; }
+
+    h2.section {
+      font-size: 1.55rem;
+      font-weight: normal;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.2rem;
+    }
+
+    /* Three capacity tiles */
+    .cap-tiles {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.8rem;
+      margin: 1.8rem 0;
+    }
+    @media (max-width: 560px) { .cap-tiles { grid-template-columns: 1fr; } }
+    .cap-tile {
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-top: 3px solid var(--accent);
+      border-radius: 11px;
+      padding: 1.1rem 1rem;
+      text-align: center;
+    }
+    .cap-name { font-size: 1.04rem; color: var(--accent); display: block; margin-bottom: 0.25rem; }
+    .cap-gloss { font-family: var(--sans); font-size: 0.74rem; color: var(--muted); line-height: 1.4; }
+
+    /* Big pull statement */
+    .pull {
+      font-size: 1.45rem;
+      line-height: 1.42;
+      font-style: italic;
+      color: var(--text);
+      border-left: 3px solid var(--accent);
+      padding-left: 1.4rem;
+      margin: 2.2rem 0;
+    }
+    .pull.climax { font-style: normal; font-size: 1.5rem; }
+
+    /* Synthetic-data note */
+    .note-block {
+      font-family: var(--sans);
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: var(--text-soft);
+      background: #f1efe9;
+      border-radius: 10px;
+      padding: 1.1rem 1.25rem;
+      margin: 2rem 0 0;
+    }
+    .note-block strong { color: var(--text); }
+
+    /* Practices intro */
+    .practices-intro {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 3rem 0 1.3rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    /* PRACTICE CARD */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-top: 3px solid var(--c, var(--accent));
+      border-radius: 14px;
+      padding: 1.5rem 1.6rem 1.6rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 1px 3px rgba(20, 20, 15, 0.035);
+    }
+    .card-head {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1.3rem;
+      flex-wrap: wrap;
+    }
+    .num {
+      width: 2.1rem; height: 2.1rem;
+      border-radius: 50%;
+      background: var(--c, var(--accent));
+      color: #fff;
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: 0.82rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .card-head h2 {
+      font-size: 1.35rem;
+      font-weight: normal;
+      line-height: 1.18;
+      letter-spacing: -0.01em;
+      flex: 1;
+      min-width: 55%;
+    }
+    .age {
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--c, var(--accent));
+      background: rgba(0, 0, 0, 0.04);
+      border-radius: 999px;
+      padding: 0.25rem 0.65rem;
+      white-space: nowrap;
+    }
+
+    /* Before -> after */
+    .ba {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 0.85rem;
+      align-items: stretch;
+      margin-bottom: 1rem;
+    }
+    .ba-col {
+      padding: 0.85rem 1rem;
+      border-radius: 9px;
+      font-size: 0.9rem;
+      line-height: 1.58;
+    }
+    .ba-col p { margin: 0; }
+    .ba-col.instinct { background: rgba(176, 138, 46, 0.09); }
+    .ba-col.works    { background: rgba(45, 89, 134, 0.07); }
+    .ba-col.instinct .mini-lbl { color: var(--amber-d); }
+    .ba-col.works .mini-lbl { color: var(--accent); }
+    .ba-arrow {
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted); font-size: 1.2rem; font-family: var(--sans);
+    }
+    @media (max-width: 620px) {
+      .ba { grid-template-columns: 1fr; gap: 0.6rem; }
+      .ba-arrow { transform: rotate(90deg); padding: 0.1rem 0; }
+    }
+
+    /* Why it breaks */
+    .why {
+      background: rgba(168, 69, 47, 0.055);
+      border-radius: 9px;
+      padding: 0.85rem 1rem;
+      margin-bottom: 1rem;
+    }
+    .why .mini-lbl { color: var(--red); }
+    .why p { margin: 0; font-size: 0.9rem; line-height: 1.6; }
+
+    /* Voices */
+    .voices {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem;
+      margin-bottom: 1rem;
+    }
+    @media (max-width: 620px) { .voices { grid-template-columns: 1fr; } }
+    .voice { border-left: 2px solid var(--rule); padding-left: 0.9rem; }
+    .voice p {
+      font-style: italic;
+      color: var(--text-soft);
+      font-size: 0.9rem;
+      line-height: 1.55;
+      margin: 0 0 0.35rem;
+    }
+    .voice cite {
+      font-family: var(--sans);
+      font-style: normal;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* Working / Failing */
+    .signals {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem;
+    }
+    @media (max-width: 620px) { .signals { grid-template-columns: 1fr; } }
+    .sig {
+      padding: 0.85rem 1rem;
+      border-radius: 9px;
+      font-size: 0.88rem;
+      line-height: 1.55;
+    }
+    .sig p { margin: 0; }
+    .sig.good { background: rgba(63, 122, 69, 0.085); }
+    .sig.bad  { background: rgba(168, 69, 47, 0.07); }
+    .sig-h {
+      font-family: var(--sans);
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+    .sig.good .sig-h { color: var(--green); }
+    .sig.bad .sig-h { color: var(--red); }
+    .sig .note {
+      display: block;
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* Takeaway */
+    .cta {
+      font-style: italic;
+      font-size: 1.16rem;
+      line-height: 1.6;
+      color: var(--text-soft);
+      border-top: 1px solid var(--rule);
+      padding-top: 1.5rem;
+      margin-top: 2.2rem;
+    }
+    .tags {
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      color: var(--accent);
+      margin-top: 1.4rem;
+    }
+    .tags span { margin-right: 0.85rem; white-space: nowrap; }
+
+    /* Sources */
+    #sources {
+      border-top: 1px solid var(--rule);
+      padding-top: 2.75rem;
+      margin-top: 3rem;
+    }
+    #sources h2 { font-size: 1.3rem; font-weight: normal; margin-bottom: 1rem; }
+    #sources > p {
+      font-family: var(--sans);
+      color: var(--text-soft);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+    .src-group {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 1.75rem 0 0.9rem;
+    }
+    .src-group.first { margin-top: 0; }
+    .sources-list { list-style: none; counter-reset: src; font-family: var(--sans); }
+    .sources-list li {
+      counter-increment: src;
+      position: relative;
+      padding-left: 2rem;
+      margin-bottom: 0.8rem;
+      font-size: 0.84rem;
+      line-height: 1.55;
+    }
+    .sources-list li::before {
+      content: counter(src);
+      position: absolute;
+      left: 0; top: 0.1rem;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .sources-list .src-pub { color: var(--muted); }
+    .sources-list a { color: var(--accent); text-decoration: none; }
+    .sources-list a:hover { text-decoration: underline; }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--rule);
+      padding-top: 2rem;
+      padding-bottom: 3.5rem;
+      margin-top: 3rem;
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">A Method for AI-Assisted Research</p>
+  <h1>What&rsquo;s worth teaching a child when AI can answer everything?</h1>
+
+  <p class="lede">For a lot of parents, raising a child now feels like an arms race. Ballet on Saturday, German tutoring on Sunday, maths after school &mdash; lessons booked in the hope they&rsquo;ll buy a child something later on: a place, a network, an edge.</p>
+  <p class="lede">But nobody can say what &ldquo;later on&rdquo; looks like anymore. Which raises an awkward question. If you can&rsquo;t predict the future, what do you actually invest in? <strong>What holds its value no matter how things turn out?</strong></p>
+</header>
+
+<main>
+
+  <section id="research">
+    <h2 class="section">What the research pointed to</h2>
+    <p>So I put it to AI &mdash; not for parenting hacks, but to comb through the research on which human skills actually survive wave after wave of automation. The same three kept coming back.</p>
+
+    <div class="cap-tiles">
+      <div class="cap-tile">
+        <span class="cap-name">Metacognition</span>
+        <span class="cap-gloss">thinking about your own thinking</span>
+      </div>
+      <div class="cap-tile">
+        <span class="cap-name">Adaptive Judgment</span>
+        <span class="cap-gloss">deciding well without a map</span>
+      </div>
+      <div class="cap-tile">
+        <span class="cap-name">Complex Communication</span>
+        <span class="cap-gloss">making others truly understand</span>
+      </div>
+    </div>
+
+    <p>Coding camps and tech-literacy courses didn&rsquo;t make the cut. The pattern across decades of labour data is boringly consistent: machines take the repeatable work, and the value of these three goes up, not down.</p>
+    <p>Which is a tidy answer. The harder question is whether any of it survives an actual household &mdash; the tiredness, the guilt, the kid melting down on a Tuesday. So I went looking.</p>
+  </section>
+
+  <section id="method">
+    <h2 class="section">Stress-testing the framework</h2>
+    <p>A clean list of skills is easy to write. Getting them to work in a real home is not. So I tested each idea against a crowd of invented parents and kids: a single parent with no time, an expat family that moves every two years, a competitive mum who can&rsquo;t stay off the sideline. Then I let them argue with it. (The method&rsquo;s called <strong>stochastic consensus</strong> &mdash; there&rsquo;s a link at the end if you want the how.)</p>
+    <p>Almost nothing survived as written. The polished version the AI proposed first kept snapping on ordinary friction &mdash; the guilt, the exhaustion, the parent who can&rsquo;t keep quiet. What came back was messier, and far more usable.</p>
+
+    <p class="pull">Nearly all of it came down to the same thing: not what the child does, but what the parent can stop themselves from doing.</p>
+
+    <p class="note-block"><strong>Everything below is synthetic.</strong> The personas, quotes, and observations were generated by AI agents as proxies for user research &mdash; hypotheses about what parents and children might say, not evidence of what real ones have said. What follows is a curated subset of foundational practices, not the full list.</p>
+  </section>
+
+  <p class="practices-intro">Four practices, stress-tested</p>
+
+  <!-- PRACTICE 1 -->
+  <article class="card" style="--c:#b08a2e">
+    <div class="card-head">
+      <span class="num">1</span>
+      <h2>Managing Boredom</h2>
+      <span class="age">Ages 3&ndash;6</span>
+    </div>
+
+    <div class="ba">
+      <div class="ba-col instinct">
+        <span class="mini-lbl">The instinct</span>
+        <p>Give them a daily stretch of nothing-to-do, no screens, and let creativity fill the gap.</p>
+      </div>
+      <div class="ba-arrow">&rarr;</div>
+      <div class="ba-col works">
+        <span class="mini-lbl">What works</span>
+        <p>Stop rescuing them. Stay in the room but unavailable. Hand the time over: <em>&ldquo;This is yours. I don&rsquo;t know what you&rsquo;ll do with it. Neither do you.&rdquo;</em></p>
+      </div>
+    </div>
+
+    <div class="why">
+      <span class="mini-lbl">Why the instinct breaks</span>
+      <p>It assumes a parent who&rsquo;s around but hands-off &mdash; and a child who has somewhere to get lost. Boredom turns into invention when a kid knows a place inside out: the garage, the corner of the garden that smells of something, the sound of the back alley. Children who move a lot don&rsquo;t have that. For them the empty time fills with low-grade anxiety instead of ideas. Add a single parent, or no community nearby, and it tips into loneliness. So when a bored child trails the parent around the house, that&rsquo;s usually not boredom at all. It&rsquo;s a bid for closeness.</p>
+    </div>
+
+    <div class="voices">
+      <blockquote class="voice">
+        <p>When he follows me from room to room whining that he&rsquo;s bored, it doesn&rsquo;t feel like a creative breakthrough &mdash; it feels like I&rsquo;m neglecting him after a grueling day at work. The guilt makes it almost impossible not to hand him a screen just to make it stop.</p>
+        <cite>Parent</cite>
+      </blockquote>
+      <blockquote class="voice">
+        <p>&ldquo;I don&rsquo;t know what to do.&rdquo; &ldquo;I feel like I am being punished.&rdquo;</p>
+        <cite>Child</cite>
+      </blockquote>
+    </div>
+
+    <div class="signals">
+      <div class="sig good">
+        <span class="sig-h">Working</span>
+        <p>The child stops glancing at you for cues. They start talking to themselves and roping in whatever&rsquo;s nearby &mdash; a spoon becomes a character, a corner becomes a fort. The restlessness turns into something they started on their own.</p>
+        <span class="note">Little ones get stuck on the early discomfort; older ones look back on those screen-free Saturdays almost fondly.</span>
+      </div>
+      <div class="sig bad">
+        <span class="sig-h">Failing</span>
+        <p>The child keeps drifting back, helpless, until the parent caves and fills the time for them.</p>
+      </div>
+    </div>
+  </article>
+
+  <!-- PRACTICE 2 -->
+  <article class="card" style="--c:#2d5986">
+    <div class="card-head">
+      <span class="num">2</span>
+      <h2>Low-Stakes Sports</h2>
+      <span class="age">Ages 6&ndash;9</span>
+    </div>
+
+    <div class="ba">
+      <div class="ba-col instinct">
+        <span class="mini-lbl">The instinct</span>
+        <p>Put the child in a sport they&rsquo;re not naturally good at, often enough that they lose for real and keep showing up.</p>
+      </div>
+      <div class="ba-arrow">&rarr;</div>
+      <div class="ba-col works">
+        <span class="mini-lbl">What works</span>
+        <p>The child picks the sport from a short list you&rsquo;re fine with. They set their own goal up front &mdash; never &ldquo;win,&rdquo; but something small and specific they chose. After the game, you say nothing. What keeps them going is usually something you&rsquo;d never guess: one kid they want to beat, a friend who tags along, one clean moment they&rsquo;re chasing.</p>
+      </div>
+    </div>
+
+    <div class="why">
+      <span class="mini-lbl">Why the instinct breaks</span>
+      <p>Signing up is the easy part. The real problem isn&rsquo;t money or the calendar &mdash; it&rsquo;s what the parent does on the sideline. The kids kept saying it was being watched that made it worse: a parent leaning in from the bench, classmates in view. Not the losing itself. And the usual theory, that failing builds resilience, only half holds. Without some visible sign they&rsquo;re improving, kids don&rsquo;t get tougher. They just get used to being stuck.</p>
+    </div>
+
+    <div class="voices">
+      <blockquote class="voice">
+        <p>The constraint was never cost or scheduling &mdash; it was my own restraint. I started bringing a book to every session so I physically couldn&rsquo;t coach or hover from the sideline.</p>
+        <cite>Parent</cite>
+      </blockquote>
+      <blockquote class="voice">
+        <p>&ldquo;I don&rsquo;t know if I&rsquo;m getting better or just getting used to feeling bad.&rdquo; &ldquo;Watching my mum clapping too hard from the bench somehow makes failing feel worse.&rdquo;</p>
+        <cite>Child</cite>
+      </blockquote>
+    </div>
+
+    <div class="signals">
+      <div class="sig good">
+        <span class="sig-h">Working</span>
+        <p>Without being told, the child has another go at the thing they flubbed last time. After a bad session they talk about what went wrong rather than just feeling bad about it. Eventually you&rsquo;ll catch them coaching themselves under their breath (<em>&ldquo;I keep dropping my shoulder&rdquo;</em>).</p>
+        <span class="note">&ldquo;I swam a full length alone with no one watching &mdash; it counted anyway, and I don&rsquo;t totally know why.&rdquo;</span>
+      </div>
+      <div class="sig bad">
+        <span class="sig-h">Failing</span>
+        <p>The child invents reasons to leave early or skip, and goes quiet and shut-down after a bad day.</p>
+        <span class="note">Anger and complaining are fine &mdash; that&rsquo;s processing. Silence and withdrawal are the warning signs.</span>
+      </div>
+    </div>
+  </article>
+
+  <!-- PRACTICE 3 -->
+  <article class="card" style="--c:#3f7a45">
+    <div class="card-head">
+      <span class="num">3</span>
+      <h2>Structured Family Arguments</h2>
+      <span class="age">Ages 6&ndash;9</span>
+    </div>
+
+    <div class="ba">
+      <div class="ba-col instinct">
+        <span class="mini-lbl">The instinct</span>
+        <p>A weekly, screen-free argument where the adult disagrees and won&rsquo;t fold, so the child has to make and defend a case.</p>
+      </div>
+      <div class="ba-arrow">&rarr;</div>
+      <div class="ba-col works">
+        <span class="mini-lbl">What works</span>
+        <p>Twice a month is plenty &mdash; you&rsquo;re teaching them to think on their feet under a bit of pressure, not to build a tidy argument. Let the child pick the topic some of the time. Agree the rules first, and make winning real and out loud: <em>&ldquo;Good point. You changed my mind.&rdquo;</em> Turn it into a game by having them argue a side they don&rsquo;t actually believe. Hold your ground without caving or turning it into a lecture. If they land one point you can&rsquo;t answer, they win &mdash; and you have to say so.</p>
+      </div>
+    </div>
+
+    <div class="why">
+      <span class="mini-lbl">Why the instinct breaks</span>
+      <p>Weekly is a fantasy that mostly produces guilt; twice a month is what actually happens. And the moment a child gets upset or says something plainly wrong, most adults can&rsquo;t help themselves &mdash; they soften, correct, or shut it down.</p>
+    </div>
+
+    <div class="voices">
+      <blockquote class="voice">
+        <p>This is incredibly difficult because I hate conflict at home. The second my child gets upset or says something completely wrong, my instinct is to step in, correct them, and shut the argument down.</p>
+        <cite>Parent</cite>
+      </blockquote>
+      <blockquote class="voice">
+        <p>My face goes hot, I worry that Dad will be cross with me afterward, and I just want to say &lsquo;you&rsquo;re right&rsquo; just to make it stop.</p>
+        <cite>Child</cite>
+      </blockquote>
+    </div>
+
+    <div class="signals">
+      <div class="sig good">
+        <span class="sig-h">Working</span>
+        <p>Mid-argument, the child comes up with a new point instead of just saying the first one louder. Backed into a corner, they shift position rather than getting louder or going silent.</p>
+        <span class="note">Good sign: they start pushing back or negotiating elsewhere too &mdash; at dinner, in front of the TV.</span>
+      </div>
+      <div class="sig bad">
+        <span class="sig-h">Failing</span>
+        <p>The child goes quiet and waits it out, or just repeats the same point with more heat. Both mean they&rsquo;ve shut down.</p>
+      </div>
+    </div>
+  </article>
+
+  <!-- PRACTICE 4 -->
+  <article class="card" style="--c:#b5572e">
+    <div class="card-head">
+      <span class="num">4</span>
+      <h2>Continuous Discipline through Music</h2>
+      <span class="age">Ages 9&ndash;12</span>
+    </div>
+
+    <div class="ba">
+      <div class="ba-col instinct">
+        <span class="mini-lbl">The instinct</span>
+        <p>Have them practise an instrument until they can play it for someone without flinching &mdash; the discipline of getting ready for a moment that matters.</p>
+      </div>
+      <div class="ba-arrow">&rarr;</div>
+      <div class="ba-col works">
+        <span class="mini-lbl">What works</span>
+        <p>Spread out who they play for, so you&rsquo;re not the only ears in the house. Let them build up a few pieces privately, recorded, first. Then hand the listening over &mdash; a grandparent on a video call, a neighbour, a friend they trust.</p>
+      </div>
+    </div>
+
+    <div class="why">
+      <span class="mini-lbl">Why the instinct breaks</span>
+      <p>The parent ends up being scheduler, stand-in teacher, practice-enforcer, driver and only audience all at once. There&rsquo;s only so much patience left to actually enjoy the playing after all that, and the jobs pull against each other. The quiet practice on their own isn&rsquo;t the warm-up for the discipline &mdash; it <em>is</em> the discipline. Your job is to listen, not to grade. Correcting them tends to kill it; calling it &ldquo;cute&rdquo; tells them it didn&rsquo;t count.</p>
+    </div>
+
+    <div class="voices">
+      <blockquote class="voice">
+        <p>By the time I&rsquo;ve played chauffeur, calendar manager, and practice cop to get them to sit down with the instrument, I have zero emotional bandwidth left to just sit back, listen, and appreciate what they are playing.</p>
+        <cite>Parent</cite>
+      </blockquote>
+      <blockquote class="voice">
+        <p>&ldquo;I enjoy playing the guitar alone with the door closed.&rdquo; &ldquo;I don&rsquo;t know if I would miss the violin, or if I would just miss being the girl who is known for being good at the violin.&rdquo;</p>
+        <cite>Child</cite>
+      </blockquote>
+    </div>
+
+    <div class="signals">
+      <div class="sig good">
+        <span class="sig-h">Working</span>
+        <p>The child practises without being nagged, and starts fussing over some small thing they can&rsquo;t quite name yet, past just getting the notes right. They play for themselves, not to prove they can. The music starts to sound like it means something to them.</p>
+      </div>
+      <div class="sig bad">
+        <span class="sig-h">Failing</span>
+        <p>They do the minimum and stop on the dot. They play only when made to, and glance at your face for a verdict the second they finish. The instrument stays a chore, never theirs.</p>
+      </div>
+    </div>
+  </article>
+
+  <section id="takeaway">
+    <h2 class="section">What I took away</h2>
+    <p>If there&rsquo;s one thread through all of it, it&rsquo;s the struggle. AI hands over the answer before a kid has had to sit with the question, and the sitting-with-it is where the learning actually happens.</p>
+
+    <p class="pull climax">So maybe the job isn&rsquo;t to teach them more. It&rsquo;s to protect the friction &mdash; to stop drawing them a map of a world we can&rsquo;t see, and help them build something that works without one.</p>
+
+    <p class="cta">Which leaves a question for anyone raising a child: what&rsquo;s your version of &ldquo;investing in gold&rdquo; &mdash; and would it survive a week of real life?</p>
+
+    <p class="tags">
+      <span>#Parenting</span><span>#FutureOfWork</span><span>#Education</span><span>#Resilience</span><span>#Metacognition</span>
+    </p>
+  </section>
+
+  <section id="sources">
+    <h2>Sources</h2>
+    <p>The empirical backdrop for the framing above &mdash; how young people actually use AI, and what offloading the struggle does to learning. The practices, personas, and quotes in this piece remain synthetic; these studies informed the thinking, they don&rsquo;t validate the simulation.</p>
+
+    <p class="src-group first">How young people use AI now &mdash; 2025&ndash;26</p>
+    <ol class="sources-list">
+      <li>Stanford HAI, <em>The 2026 AI Index Report</em>, 2026. <a href="https://hai.stanford.edu/ai-index/2026-ai-index-report">hai.stanford.edu</a></li>
+      <li>Common Sense Media, <em>AI Use by Tweens and Teens</em> (2026 Census) and &ldquo;Talk, Trust, and Trade-Offs&rdquo; (2025). <a href="https://www.commonsensemedia.org/research/a-comprehensive-report-on-teens-tweens-and-ai">commonsensemedia.org</a></li>
+      <li>RAND, &ldquo;More Students Use AI for Homework, and More Believe It Harms Critical Thinking,&rdquo; American Youth Panel, 2026. <a href="https://www.rand.org/pubs/research_reports/RRA4742-1.html">rand.org</a></li>
+      <li>Pew Research Center, &ldquo;Teens, Social Media and AI Chatbots&rdquo; (2025) and &ldquo;How Teens Use and View AI.&rdquo; <span class="src-pub">pewresearch.org</span></li>
+      <li>Gallup / Walton Family Foundation, &ldquo;Voices of Gen Z: The AI Paradox,&rdquo; 2026. <span class="src-pub">news.gallup.com</span></li>
+      <li>JAMES / JAMESfocus, ZHAW &amp; Swisscom, 2024. <span class="src-pub">zhaw.ch</span></li>
+    </ol>
+
+    <p class="src-group">What it does to thinking &amp; learning</p>
+    <ol class="sources-list">
+      <li>Brookings Institution, &ldquo;A New Direction for Students in an AI World: Prosper, Prepare, Protect,&rdquo; 2026. <a href="https://www.brookings.edu/articles/a-new-direction-for-students-in-an-ai-world-prosper-prepare-protect/">brookings.edu</a></li>
+      <li>N. Kosmyna et al., &ldquo;Your Brain on ChatGPT,&rdquo; MIT Media Lab, 2025.</li>
+      <li>M. Gerlich, &ldquo;AI Tools in Society,&rdquo; <em>Societies</em>, 2025.</li>
+      <li>&ldquo;The cognitive paradox of AI in education: between enhancement and erosion,&rdquo; peer-reviewed review, 2025. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12036037/">ncbi.nlm.nih.gov</a></li>
+      <li>G. Kestin et al., &ldquo;AI Tutoring Outperforms Active Learning,&rdquo; Harvard, 2024.</li>
+      <li>World Bank, generative-AI tutoring trial, Edo State, Nigeria, 2024.</li>
+      <li>R. Dakan &amp; J. Feller with Anthropic, &ldquo;AI Fluency Framework.&rdquo; <a href="https://www.anthropic.com/ai-fluency">anthropic.com/ai-fluency</a></li>
+    </ol>
+  </section>
+
+</main>
+
+<footer>
+  <p>A research artifact. Not a product. Built in public. &mdash; <a href="../stochastic-consensus/">How the research was run</a> &middot; <a href="https://github.com/lilydavida/sprint-series">GitHub</a></p>
+</footer>
+
+</body>
+</html>
